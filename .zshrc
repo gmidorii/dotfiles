@@ -6,19 +6,15 @@ ZSH_THEME="gallois"
 plugins=(git)
 
 # User configuration
-
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
 
- source $ZSH/oh-my-zsh.sh
-
+source $ZSH/oh-my-zsh.sh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
 # 環境変数
 export LANG=ja_JP.UTF-8
-
 
 # 色を使用出来るようにする
 autoload -Uz colors
@@ -55,3 +51,5 @@ setopt auto_menu
 
 ## 補完候補のカーソル選択を有効に
 zstyle ':completion:*:default' menu select=1
+
+alias vi="vim"
