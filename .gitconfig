@@ -3,10 +3,12 @@
 	email = stitow14@gmail.com
 [core]
 	excludesfile = /Users/midori/.gitignore
-	editor = atom --wait
 [alias]
 	ch = checkout
 	co = commit
 	st = status
 	br = branch
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	pu = !git push origin `git rev-parse --abbrev-ref HEAD`
+[ghq]
+	root = /Users/midori/src/golang/src
