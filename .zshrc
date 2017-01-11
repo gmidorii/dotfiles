@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
- export ZSH=/Users/midori/.oh-my-zsh
+export ZSH=/Users/midori/.oh-my-zsh
 
 ZSH_THEME="gallois"
 
@@ -12,6 +12,10 @@ source $ZSH/oh-my-zsh.sh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+### Golang
+export GOPATH="/Users/midori/src/golang"
+export PATH="$PATH:$GOPATH/bin"
 
 # 環境変数
 export LANG=ja_JP.UTF-8
