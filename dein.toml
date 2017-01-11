@@ -1,0 +1,21 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]] # toml syntax
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+
+[[plugins]]
+repo    = 'vim-airline/vim-airline'
+depends = ['vim-airline-themes']
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]] # Golang
+repo = 'fatih/vim-go'
+on_ft = ['go']
+

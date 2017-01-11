@@ -1,5 +1,3 @@
-syntax on
-
 set number
 set title
 set tabstop=2
@@ -42,7 +40,7 @@ endif
 let &runtimepath = s:dein_repo_dir .",". &runtimepath
 
 " read plugin 
-let s:toml_file = fnamemodify(expand('<sfile>'), ':h').'/.dein.toml'
+let s:toml_file = fnamemodify(expand('<sfile>'), ':h').'/dein.toml'
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir, [$MYVIMRC, s:toml_file])
   call dein#load_toml(s:toml_file)
@@ -61,3 +59,10 @@ let file_name = expand('%')
 if has('vim_starting') &&  file_name == ''
   autocmd VimEnter * NERDTree ./
 endif
+
+syntax on
+
+let g:airline#extensions#tabline#enabled = 1
+
+" tree shortcut
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
