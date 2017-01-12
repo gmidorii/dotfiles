@@ -1,14 +1,21 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/midori/.oh-my-zsh
+export ZSH=/Users/midori/dotfiles
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+# zplug
+zplug "tcnksm/docker-alias", use:zshrc
+zplug "plugins/git",   from:oh-my-zsh
+zplug "plugins/brew",   from:oh-my-zsh
+
+zplug load --verbose
 
 ZSH_THEME="gallois"
 
-plugins=(git)
+#plugins=(git)
 
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
-
-source $ZSH/oh-my-zsh.sh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
