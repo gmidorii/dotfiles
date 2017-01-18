@@ -7,12 +7,20 @@ source $ZPLUG_HOME/init.zsh
 zplug "tcnksm/docker-alias", use:zshrc
 zplug "plugins/git",   from:oh-my-zsh
 zplug "plugins/brew",   from:oh-my-zsh
+zplug "b4b4r07/enhancd", use:enhancd.sh
+zplug "zsh-users/zsh-syntax-highlighting", defer:3
+zplug "themes/kphoen", from:oh-my-zsh
+
+# zplug install
+if ! zplug check --verbose; then
+  printf 'Install? [y/N]: '
+  if read -q; then
+    echo; zplug install
+  fi
+fi
 
 zplug load --verbose
 
-ZSH_THEME="gallois"
-
-#plugins=(git)
 
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
@@ -63,4 +71,9 @@ setopt auto_menu
 ## 補完候補のカーソル選択を有効に
 zstyle ':completion:*:default' menu select=1
 
+# keybind
+bindkey -e
+
+# alias
 alias vi="vim"
+alias gs="git status"

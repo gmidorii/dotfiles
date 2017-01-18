@@ -66,3 +66,6 @@ let g:airline#extensions#tabline#enabled = 1
 
 " tree shortcut
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
+
+" show dotfiles
+let NERDTreeShowHidden=1
