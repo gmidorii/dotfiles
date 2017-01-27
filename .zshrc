@@ -1,5 +1,10 @@
+# 初回シェル時のみ tmux実行
+if [ $SHLVL = 1 ]; then
+ tmux
+fi
+
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/midori/dotfiles
+export ZSH=$HOME/dotfiles
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
@@ -29,7 +34,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
 export PATH="/usr/local/heroku/bin:$PATH"
 
 ### Golang
-export GOPATH="/Users/midori/src/golang"
+export GOPATH="$HOME/dev"
 export PATH="$PATH:$GOPATH/bin"
 
 # 環境変数
@@ -77,3 +82,8 @@ bindkey -e
 # alias
 alias vi="vim"
 alias gs="git status"
+alias gb-del="git branch --merged |egrep -v '\\*|develop|master'|xargs git branch -d"
+alias gch="git checkout"
+
+# .zprofile
+source ~/.zprofile
