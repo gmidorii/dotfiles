@@ -34,8 +34,11 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
 export PATH="/usr/local/heroku/bin:$PATH"
 
 ### Golang
-export GOPATH="$HOME/dev"
+export GOPATH="$HOME/src/golang"
 export PATH="$PATH:$GOPATH/bin"
+
+# GTask
+export PATH="$PATH:$HOME/src/golang/src/github.com/midorigreen/gtask"
 
 # 環境変数
 export LANG=ja_JP.UTF-8
