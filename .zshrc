@@ -1,7 +1,7 @@
 # 初回シェル時のみ tmux実行
-if [ $SHLVL = 1 ]; then
- tmux
-fi
+#if [ $SHLVL = 1 ]; then
+# tmux
+#fi
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/dotfiles
@@ -33,12 +33,12 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-### Golang
-export GOPATH="$HOME/src/golang"
-export PATH="$PATH:$GOPATH/bin"
 
 # GTask
 export PATH="$PATH:$HOME/src/golang/src/github.com/midorigreen/gtask"
+
+# grpc
+export PATH="$PATH:$HOME/command/protoc/bin"
 
 # 環境変数
 export LANG=ja_JP.UTF-8
@@ -87,6 +87,25 @@ alias vi="vim"
 alias gs="git status"
 alias gb-del="git branch --merged |egrep -v '\\*|develop|master'|xargs git branch -d"
 alias gch="git checkout"
+alias ll="ls -ltrG"
+alias ls="ls -G"
 
 # .zprofile
 source ~/.zprofile
+if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f /Users/midori/Downloads/google-cloud-sdk/path.zsh.inc ]; then
+  source '/Users/midori/Downloads/google-cloud-sdk/path.zsh.inc'
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f /Users/midori/Downloads/google-cloud-sdk/completion.zsh.inc ]; then
+  source '/Users/midori/Downloads/google-cloud-sdk/completion.zsh.inc'
+fi
+
+[[ -s "/Users/midori/.gvm/scripts/gvm" ]] && source "/Users/midori/.gvm/scripts/gvm"
+
+### Golang
+export GOPATH="$HOME/src/golang"
+export PATH="$PATH:$GOPATH/bin"
