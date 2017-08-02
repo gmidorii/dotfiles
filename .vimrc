@@ -20,6 +20,22 @@ set wrapscan
 set hlsearch
 set autowrite
 
+" key bind
+"" window
+nnoremap s <Nop>
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sh <C-w>h
+nnoremap ss :<C-u>sp<CR>
+nnoremap sv :<C-u>vs<CR>
+nnoremap sw <C-w>w
+"" tab
+nnoremap st :<C-u>tabnew<CR>
+nnoremap sn gt
+nnoremap sp gT
+nnoremap sq :<C-u>q<CR>
+
 colorscheme hybrid
 set t_Co=256
 
