@@ -34,12 +34,23 @@ nnoremap sw <C-w>w
 nnoremap st :<C-u>tabnew<CR>
 nnoremap sn gt
 nnoremap sp gT
-nnoremap sq :<C-u>q<CR>
+nnoremap tr :<C-u>NERDTree<CR>
 
 colorscheme hybrid
 set t_Co=256
 
 set laststatus=2
+
+" LEADER
+let mapleader = "\<Space>"
+" go build
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+" go run
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+" save file
+nnoremap <Leader>w :w<CR>
+" close file
+nnoremap <Leader>q :wq<CR>
 
 " ファイルタイプ別のプラグイン/インデントを有効にする
 filetype plugin indent on
@@ -68,6 +79,7 @@ if dein#load_state('/Users/midori/.vim/dein')
 	call dein#add('fatih/vim-go')
 	call dein#add('vim-airline/vim-airline')
 	call dein#add('vim-airline/vim-airline-themes')
+	call dein#add('scrooloose/nerdtree')
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
