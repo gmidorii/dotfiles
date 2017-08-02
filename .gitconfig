@@ -2,7 +2,7 @@
 	name = tagasouichiro
 	email = stitow14@gmail.com
 [core]
-	excludesfile = /Users/midori/.gitignore
+	excludesfile = /Users/midori/.gitignore_global
 [alias]
 	ch = checkout
 	co = commit
