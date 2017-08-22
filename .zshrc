@@ -1,7 +1,7 @@
 # 初回シェル時のみ tmux実行
-#if [ $SHLVL = 1 ]; then
-# tmux
-#fi
+if [ $SHLVL = 1 ]; then
+ tmux
+fi
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/dotfiles
@@ -89,6 +89,7 @@ alias gb-del="git branch --merged |egrep -v '\\*|develop|master'|xargs git branc
 alias gch="git checkout"
 alias ll="ls -ltrG"
 alias ls="ls -G"
+alias gl="git log --decorate --oneline"
 
 # .zprofile
 source ~/.zprofile
@@ -107,5 +108,17 @@ fi
 [[ -s "/Users/midori/.gvm/scripts/gvm" ]] && source "/Users/midori/.gvm/scripts/gvm"
 
 ### Golang
-export GOPATH="$HOME/src/golang"
+export GOPATH="$HOME/dev"
 export PATH="$PATH:$GOPATH/bin"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/soichiro-taga/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/soichiro-taga/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/soichiro-taga/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/soichiro-taga/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# git auto complete
+fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
+
+autoload -U compinit
+compinit -u
