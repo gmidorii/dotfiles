@@ -1,7 +1,7 @@
 # 初回シェル時のみ tmux実行
-#if [ $SHLVL = 1 ]; then
-# tmux
-#fi
+if [ $SHLVL = 1 ]; then
+ tmux
+fi
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/dotfiles
@@ -28,7 +28,7 @@ zplug load --verbose
 
 
 # User configuration
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -109,3 +109,9 @@ fi
 ### Golang
 export GOPATH="$HOME/src/golang"
 export PATH="$PATH:$GOPATH/bin"
+
+export C_INCLUDE_PATH=/System/Library/Frameworks/Python.framework/Headers
+
+## Python
+eval "$(pyenv init -)"
+
