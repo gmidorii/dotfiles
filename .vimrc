@@ -21,7 +21,8 @@ set hlsearch
 set autowrite
 set completeopt=menuone
 set mouse=a
-set ttymouse=xterm2
+"set ttymouse=xterm2
+set undodir=$HOME/vim/undo
 
 " key bind
 "" window
@@ -47,7 +48,6 @@ nnoremap <silent> [fugitive]a :Gwrite<CR>
 nnoremap <silent> [fugitive]c :Gcommit-v<CR>
 nnoremap <silent> [fugitive]d :Gdiff<CR>
 
-colorscheme hybrid
 set t_Co=256
 
 set laststatus=2
@@ -62,8 +62,16 @@ autocmd FileType go nmap <leader>r  <Plug>(go-run)
 nnoremap <Leader>w :w<CR>
 " close file
 nnoremap <Leader>q :wq<CR>
+" table mode toggle
+nnoremap <Leader>tm :TableModeToggle<CR>
 
 " vim-go
+" highlight
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+autocmd FileType go :highlight goErr cterm=bold ctermfg=214
+autocmd FileType go :match goErr /\<err\>/
 " 保存時にGoImports
 let g:go_fmt_command = "goimports"
 " gocode option(importされていない補完)
@@ -72,6 +80,7 @@ let g:go_gocode_unimported_packages = 1
 let g:UltiSnipsExpandTrigger="<tab>"
 inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
+
 
 " ファイルタイプ別のプラグイン/インデントを有効にする
 filetype plugin indent on
@@ -112,6 +121,9 @@ if dein#load_state('/Users/midori/.vim/dein')
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
+	" Markdown
+  call dein#add('dhruvasagar/vim-table-mode')
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -128,21 +140,22 @@ endif
 
 "End dein Scripts-------------------------
 
+colorscheme hybrid
+
+" scrooloose/nerdtree
 " 引数なしでvimを開くとNERDTreeを起動
 let file_name = expand('%')
 if has('vim_starting') &&  file_name == ''
   autocmd VimEnter * NERDTree ./
 endif
-
-syntax on
-
-let g:airline#extensions#tabline#enabled = 1
-
 " tree shortcut
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
-
 " show dotfiles
 let NERDTreeShowHidden=1
+
+" unknown
+syntax on
+let g:airline#extensions#tabline#enabled = 1
 
 " neocomplete
 " Disable AutoComplPop.
@@ -153,7 +166,6 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 3
-
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
     \ 'default' : '',
@@ -161,3 +173,5 @@ let g:neocomplete#sources#dictionary#dictionaries = {
     \ 'scheme' : $HOME.'/.gosh_completions'
         \ }
 
+" dhruvasagar/vim-table-mode
+let g:table_mode_corner='|'

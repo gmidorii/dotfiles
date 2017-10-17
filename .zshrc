@@ -33,10 +33,6 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/loca
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-
-# GTask
-export PATH="$PATH:$HOME/src/golang/src/github.com/midorigreen/gtask"
-
 # grpc
 export PATH="$PATH:$HOME/command/protoc/bin"
 
@@ -89,22 +85,23 @@ alias gb-del="git branch --merged |egrep -v '\\*|develop|master'|xargs git branc
 alias gch="git checkout"
 alias ll="ls -ltrG"
 alias ls="ls -G"
+alias mvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
 
 # .zprofile
 source ~/.zprofile
 if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f /Users/midori/Downloads/google-cloud-sdk/path.zsh.inc ]; then
-  source '/Users/midori/Downloads/google-cloud-sdk/path.zsh.inc'
+if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then
+  source $HOME'/google-cloud-sdk/path.zsh.inc'
 fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f /Users/midori/Downloads/google-cloud-sdk/completion.zsh.inc ]; then
-  source '/Users/midori/Downloads/google-cloud-sdk/completion.zsh.inc'
+if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then
+  source $HOME'/google-cloud-sdk/completion.zsh.inc'
 fi
 
-[[ -s "/Users/midori/.gvm/scripts/gvm" ]] && source "/Users/midori/.gvm/scripts/gvm"
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 ### Golang
 export GOPATH="$HOME/src/golang"
