@@ -40,6 +40,11 @@ export PATH="$PATH:$HOME/src/golang/src/github.com/midorigreen/gtask"
 # grpc
 export PATH="$PATH:$HOME/command/protoc/bin"
 
+# pyenv
+PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 # 環境変数
 export LANG=ja_JP.UTF-8
 
@@ -90,6 +95,7 @@ alias gch="git checkout"
 alias ll="ls -ltrG"
 alias ls="ls -G"
 alias gl="git log --decorate --oneline"
+alias ssh='TERM=xterm ssh'
 
 # .zprofile
 source ~/.zprofile
@@ -122,3 +128,9 @@ fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 
 autoload -U compinit
 compinit -u
+
+# JAVA
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+
+GREP_OPTIONS="--color=always";export GREP_OPTIONS
+
