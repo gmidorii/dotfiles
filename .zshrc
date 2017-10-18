@@ -28,14 +28,10 @@ zplug load --verbose
 
 
 # User configuration
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
-
-
-# GTask
-export PATH="$PATH:$HOME/src/golang/src/github.com/midorigreen/gtask"
 
 # grpc
 export PATH="$PATH:$HOME/command/protoc/bin"
@@ -96,32 +92,27 @@ alias ll="ls -ltrG"
 alias ls="ls -G"
 alias gl="git log --decorate --oneline"
 alias ssh='TERM=xterm ssh'
+alias mvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
 
 # .zprofile
 source ~/.zprofile
 if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f /Users/midori/Downloads/google-cloud-sdk/path.zsh.inc ]; then
-  source '/Users/midori/Downloads/google-cloud-sdk/path.zsh.inc'
+if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then
+  source $HOME'/google-cloud-sdk/path.zsh.inc'
 fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f /Users/midori/Downloads/google-cloud-sdk/completion.zsh.inc ]; then
-  source '/Users/midori/Downloads/google-cloud-sdk/completion.zsh.inc'
+if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then
+  source $HOME'/google-cloud-sdk/completion.zsh.inc'
 fi
 
-[[ -s "/Users/midori/.gvm/scripts/gvm" ]] && source "/Users/midori/.gvm/scripts/gvm"
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 ### Golang
 export GOPATH="$HOME/dev"
 export PATH="$PATH:$GOPATH/bin"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/soichiro-taga/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/soichiro-taga/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/soichiro-taga/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/soichiro-taga/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 # git auto complete
 fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
@@ -133,4 +124,8 @@ compinit -u
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
 GREP_OPTIONS="--color=always";export GREP_OPTIONS
+export C_INCLUDE_PATH=/System/Library/Frameworks/Python.framework/Headers
+
+## Python
+eval "$(pyenv init -)"
 
