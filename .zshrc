@@ -106,9 +106,25 @@ fi
 ### Golang
 export GOPATH="$HOME/src/golang"
 export PATH="$PATH:$GOPATH/bin"
+export PATH="$HOME/.goenv/bin:$PATH"
+eval "$(goenv init -)"
 
 export C_INCLUDE_PATH=/System/Library/Frameworks/Python.framework/Headers
 
 ## Python
 eval "$(pyenv init -)"
 
+## History
+# 履歴ファイルの保存先
+export HISTFILE=${HOME}/.zsh_history
+# メモリに保存される履歴の件数
+export HISTSIZE=1000
+# 履歴ファイルに保存される履歴の件数
+export SAVEHIST=100000
+# 重複を記録しない
+setopt hist_ignore_dups
+# 開始と終了を記録
+setopt EXTENDED_HISTORY
+setopt share_history
+setopt append_history
+setopt hist_ignore_all_dups
