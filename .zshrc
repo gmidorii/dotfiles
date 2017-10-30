@@ -103,6 +103,8 @@ if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
 ### Golang
 export GOPATH="$HOME/dev"
 export PATH="$PATH:$GOPATH/bin"
+export PATH="$HOME/.goenv/bin:$PATH"
+eval "$(goenv init -)"
 
 # git auto complete
 fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
@@ -127,3 +129,18 @@ if [ -f '/Users/soichiro-taga/y/google-cloud-sdk/path.zsh.inc' ]; then source '/
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/soichiro-taga/y/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/soichiro-taga/y/google-cloud-sdk/completion.zsh.inc'; fi
+
+## History
+# 履歴ファイルの保存先
+export HISTFILE=${HOME}/.zsh_history
+# メモリに保存される履歴の件数
+export HISTSIZE=1000
+# 履歴ファイルに保存される履歴の件数
+export SAVEHIST=100000
+# 重複を記録しない
+setopt hist_ignore_dups
+# 開始と終了を記録
+setopt EXTENDED_HISTORY
+setopt share_history
+setopt append_history
+setopt hist_ignore_all_dups
