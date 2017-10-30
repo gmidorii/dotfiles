@@ -98,16 +98,6 @@ alias mvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$
 source ~/.zprofile
 if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then
-  source $HOME'/google-cloud-sdk/path.zsh.inc'
-fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then
-  source $HOME'/google-cloud-sdk/completion.zsh.inc'
-fi
-
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 ### Golang
@@ -129,3 +119,11 @@ export C_INCLUDE_PATH=/System/Library/Frameworks/Python.framework/Headers
 ## Python
 eval "$(pyenv init -)"
 
+## night shell
+[ -n "$PS1" ] && sh ~/.nightshell/vrunchbang-dark
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/soichiro-taga/y/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/soichiro-taga/y/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/soichiro-taga/y/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/soichiro-taga/y/google-cloud-sdk/completion.zsh.inc'; fi
