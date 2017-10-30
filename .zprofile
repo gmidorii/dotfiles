@@ -8,8 +8,6 @@ alias vi='vim'
 autoload -U compinit
 compinit
 
-bindkey '^]' peco-src
-
 function peco-src() {
 	local src=$(ghq list --full-path | peco --query "$LBUFFER")
 	if [ -n "$src" ]; then
@@ -19,3 +17,8 @@ function peco-src() {
 	zle -R -c
 }
 zle -N peco-src
+bindkey '^]' peco-src
+
+function custom-cmd() {
+	local src=
+}
