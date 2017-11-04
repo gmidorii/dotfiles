@@ -58,6 +58,8 @@ let mapleader = "\<Space>"
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 " go run
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
+" go lint
+autocmd FileType go nmap <leader>l  <Plug>(go-lint)
 " save file
 nnoremap <Leader>w :w<CR>
 " close file
@@ -78,6 +80,8 @@ let g:go_fmt_command = "goimports"
 let g:go_gocode_unimported_packages = 1
 " auto complete j,k move
 let g:UltiSnipsExpandTrigger="<tab>"
+" snippet
+let g:go_snippet_engine = "neosnippet"
 inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 
@@ -109,20 +113,19 @@ if dein#load_state('/Users/midori/.vim/dein')
   call dein#add('Shougo/neosnippet.vim')
 	call dein#add('Shougo/neosnippet-snippets')
 	call dein#add('Shougo/neocomplete.vim')
-	" call dein#add('SirVer/ultisnips')
+	call dein#add('Shougo/denite.nvim')
 	call dein#add('fatih/vim-go')
 	call dein#add('vim-airline/vim-airline')
 	call dein#add('vim-airline/vim-airline-themes')
 	call dein#add('scrooloose/nerdtree')
-	call dein#add('tpope/vim-fugitive')
 	" python
 	call dein#add('davidhalter/jedi-vim', {'of_ft': 'python'})
-
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
-
 	" Markdown
   call dein#add('dhruvasagar/vim-table-mode')
+	" Git
+  call dein#add('lambdalisue/gina.vim')
 
   " Required:
   call dein#end()
@@ -181,3 +184,5 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
+" denite vim
+let g:python3_host_prog = expand('$HOME/.pyenv/shims/python3')
