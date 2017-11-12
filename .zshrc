@@ -79,7 +79,7 @@ zstyle ':completion:*:default' menu select=1
 bindkey -e
 
 # alias
-alias vi="vim"
+alias vi="nvim"
 alias gs="git status"
 alias gb-del="git branch --merged |egrep -v '\\*|develop|master'|xargs git branch -d"
 alias gch="git checkout"
