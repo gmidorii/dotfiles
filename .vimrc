@@ -99,15 +99,15 @@ endif
 "Start dein Scripts-------------------------
 
 " Required:
-set runtimepath+=/Users/midori/.vim/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=$HOME/.vim/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/Users/midori/.vim/dein')
-  call dein#begin('/Users/midori/.vim/dein')
+if dein#load_state('$HOME/.vim/dein')
+  call dein#begin('$HOME/.vim/dein')
 
   " Let dein manage dein
   " Required:
-  call dein#add('/Users/midori/.vim/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('$HOME/.vim/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
   call dein#add('Shougo/neosnippet.vim')
