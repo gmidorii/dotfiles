@@ -9,7 +9,8 @@ set showmatch
 set matchtime=1
 set fenc=utf-8
 set nobackup
-set noswapfile
+"set noswapfile
+set directory=~/.vim/swap
 set virtualedit=onemore
 set wildmode=list:longest
 set background=dark
@@ -80,14 +81,10 @@ let g:go_fmt_command = "goimports"
 let g:go_gocode_unimported_packages = 1
 " auto complete j,k move
 let g:UltiSnipsExpandTrigger="<tab>"
-" snippet
-let g:go_snippet_engine = "neosnippet"
 inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
-
-
-" ファイルタイプ別のプラグイン/インデントを有効にする
-filetype plugin indent on
+" snippet
+let g:go_snippet_engine = "neosnippet"
 
 " python実行
 autocmd BufNewFile,BufRead *.py nnoremap <C-e> :!python %
@@ -112,14 +109,18 @@ if dein#load_state('$HOME/.vim/dein')
   " Add or remove your plugins here:
   call dein#add('Shougo/neosnippet.vim')
 	call dein#add('Shougo/neosnippet-snippets')
-	call dein#add('Shougo/neocomplete.vim')
 	call dein#add('Shougo/denite.nvim')
+	call dein#add('Shougo/deoplete.nvim')
+	call dein#add('zchee/deoplete-go', {'build': 'make'})
+	"call dein#add('roxma/nvim-yarp')
+	"call dein#add('roxma/vim-hug-neovim-rpc')
 	call dein#add('fatih/vim-go')
+	call dein#add('nsf/gocode')
 	call dein#add('vim-airline/vim-airline')
 	call dein#add('vim-airline/vim-airline-themes')
 	call dein#add('scrooloose/nerdtree')
 	" python
-	call dein#add('davidhalter/jedi-vim', {'of_ft': 'python'})
+	"call dein#add('davidhalter/jedi-vim', {'of_ft': 'python'})
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 	" Markdown
@@ -157,24 +158,11 @@ nnoremap <silent><C-e> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
 " unknown
-syntax on
+"syntax on
 let g:airline#extensions#tabline#enabled = 1
 
-" neocomplete
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+" deocomplete
+let g:deoplete#enable_at_startup = 1
 
 " dhruvasagar/vim-table-mode
 let g:table_mode_corner='|'
@@ -184,5 +172,9 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-" denite vim
 let g:python3_host_prog = expand('$HOME/.pyenv/shims/python3')
+
+" Denite vim
+noremap <C-P> :Denite buffer<CR>
+noremap <C-N> :Denite file_rec<CR>
+
