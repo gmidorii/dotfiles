@@ -24,6 +24,8 @@ set completeopt=menuone
 set mouse=a
 "set ttymouse=xterm2
 set undodir=$HOME/vim/undo
+set list
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 
 " key bind
 "" window
@@ -67,6 +69,13 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :wq<CR>
 " table mode toggle
 nnoremap <Leader>tm :TableModeToggle<CR>
+" Gina status
+nnoremap <Leader>s :Gina status<CR>
+" Gina commit
+nnoremap <Leader>c :Gina commit<CR>
+" Gina push
+nnoremap <Leader>p :Gina push<CR>
+
 
 " vim-go
 " highlight
@@ -112,8 +121,10 @@ if dein#load_state('$HOME/.vim/dein')
 	call dein#add('Shougo/denite.nvim')
 	call dein#add('Shougo/deoplete.nvim')
 	call dein#add('zchee/deoplete-go', {'build': 'make'})
-	call dein#add('roxma/nvim-yarp')
-	call dein#add('roxma/vim-hug-neovim-rpc')
+	if !has('nvim')
+ 		call dein#add('roxma/nvim-yarp')
+  	call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
 	call dein#add('fatih/vim-go')
 	call dein#add('nsf/gocode')
 	call dein#add('vim-airline/vim-airline')
@@ -129,6 +140,9 @@ if dein#load_state('$HOME/.vim/dein')
   call dein#add('lambdalisue/gina.vim')
 	" ijaas
   call dein#add('$HOME/dev/src/github.com/google/ijaas/vim')
+	" color
+  "call dein#add('nightsense/office')
+  call dein#add('Heorhiy/VisualStudioDark.vim')
 
   " Required:
   call dein#end()
@@ -147,6 +161,8 @@ endif
 "End dein Scripts-------------------------
 
 colorscheme hybrid
+"colorscheme office-dark
+"colorscheme VisualStudioDark
 
 " scrooloose/nerdtree
 " 引数なしでvimを開くとNERDTreeを起動
