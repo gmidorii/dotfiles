@@ -112,8 +112,8 @@ if dein#load_state('$HOME/.vim/dein')
 	call dein#add('Shougo/denite.nvim')
 	call dein#add('Shougo/deoplete.nvim')
 	call dein#add('zchee/deoplete-go', {'build': 'make'})
-	"call dein#add('roxma/nvim-yarp')
-	"call dein#add('roxma/vim-hug-neovim-rpc')
+	call dein#add('roxma/nvim-yarp')
+	call dein#add('roxma/vim-hug-neovim-rpc')
 	call dein#add('fatih/vim-go')
 	call dein#add('nsf/gocode')
 	call dein#add('vim-airline/vim-airline')
@@ -127,6 +127,8 @@ if dein#load_state('$HOME/.vim/dein')
   call dein#add('dhruvasagar/vim-table-mode')
 	" Git
   call dein#add('lambdalisue/gina.vim')
+	" ijaas
+  call dein#add('$HOME/dev/src/github.com/google/ijaas/vim')
 
   " Required:
   call dein#end()
