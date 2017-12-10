@@ -40,6 +40,8 @@ export PATH="$PATH:$HOME/command/protoc/bin"
 PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+# App Engine
+export PATH="$PATH:$HOME/google-cloud-sdk/platform/google_appengine"
 
 # 環境変数
 export LANG=ja_JP.UTF-8
@@ -144,3 +146,12 @@ setopt EXTENDED_HISTORY
 setopt share_history
 setopt append_history
 setopt hist_ignore_all_dups
+
+# direnv
+eval "$(direnv hook zsh)"
+
+# kubectl
+autoload -U colors; colors
+source /usr/local/etc/zsh-kubectl-prompt/kubectl.zsh
+RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+
