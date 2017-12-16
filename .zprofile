@@ -16,7 +16,7 @@ function custom-cmd() {
 	local src=
 }
 
-#pecoでhistory検索
+# pecoでhistory検索
 function peco-select-history() {
   BUFFER=$(\history -n -r 1 | peco --query "$LBUFFER")
   CURSOR=$#BUFFER
@@ -24,3 +24,14 @@ function peco-select-history() {
 }
 zle -N peco-select-history
 bindkey '^r' peco-select-history
+
+# peco + kill
+function pk() {
+	PROCESS=$(ps aux | peco)
+	PID=$(echo "$PROCESS" | awk '{print $2}')
+	if [ -n "$PID" ]; then
+		echo "kill $PID"
+		kill -9 $PID
+	fi
+}
+zle -N pk

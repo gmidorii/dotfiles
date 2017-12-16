@@ -19,6 +19,13 @@ fi
 autoload -U colors; colors
 source /usr/local/etc/zsh-kubectl-prompt/kubectl.zsh
 RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+# serverless
+## tabtab source for serverless package
+## uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/midori/.nodebrew/node/v0.12.7/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/midori/.nodebrew/node/v0.12.7/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+## tabtab source for sls package
+## uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/midori/.nodebrew/node/v0.12.7/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/midori/.nodebrew/node/v0.12.7/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 
 
 ############################
@@ -69,6 +76,8 @@ eval "$(goenv init -)"
 # Python
 export C_INCLUDE_PATH=/System/Library/Frameworks/Python.framework/Headers
 eval "$(pyenv init -)"
+# Node
+export PATH="$PATH:$HOME/.nodebrew/node/v0.12.7/bin"
 
 
 ############################
@@ -136,4 +145,5 @@ setopt EXTENDED_HISTORY
 setopt share_history
 setopt append_history
 setopt hist_ignore_all_dups
+
 
