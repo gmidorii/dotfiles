@@ -3,7 +3,7 @@
 ############################
 # 初回シェル時のみ tmux実行
 if [ $SHLVL = 1 ]; then
- tmux
+ tmux -2
 fi
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then
