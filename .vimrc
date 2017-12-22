@@ -63,6 +63,7 @@ autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 " go lint
 autocmd FileType go nmap <leader>l  <Plug>(go-lint)
+"autocmd BufWritePost,FileWritePost *.go execute 'GoLint' | cwindow
 " save file
 nnoremap <Leader>w :w<CR>
 " close file
@@ -126,6 +127,7 @@ if dein#load_state('$HOME/.vim/dein')
   	call dein#add('roxma/vim-hug-neovim-rpc')
   endif
 	call dein#add('fatih/vim-go')
+	call dein#add('jodosha/vim-godebug')
 	call dein#add('nsf/gocode')
 	call dein#add('vim-airline/vim-airline')
 	call dein#add('vim-airline/vim-airline-themes')
@@ -141,8 +143,9 @@ if dein#load_state('$HOME/.vim/dein')
 	" ijaas
   call dein#add('$HOME/dev/src/github.com/google/ijaas/vim')
 	" color
-  "call dein#add('nightsense/office')
-  call dein#add('Heorhiy/VisualStudioDark.vim')
+	call dein#add('nightsense/vimspectr')
+
+  call dein#add('hotwatermorning/auto-git-diff')
 
   " Required:
   call dein#end()
@@ -161,8 +164,7 @@ endif
 "End dein Scripts-------------------------
 
 colorscheme hybrid
-"colorscheme office-dark
-"colorscheme VisualStudioDark
+"colorscheme vimspectr30curve-light
 
 " scrooloose/nerdtree
 " 引数なしでvimを開くとNERDTreeを起動
