@@ -69,6 +69,7 @@ export PATH="$PATH:$HOME/google-cloud-sdk/platform/google_appengine"
 # 環境変数
 export LANG=ja_JP.UTF-8
 # Golang
+export GOROOT="$HOME/.goenv/versions/1.9.1"
 export GOPATH="$HOME/src/golang"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.goenv/bin:$PATH"
@@ -78,7 +79,8 @@ export C_INCLUDE_PATH=/System/Library/Frameworks/Python.framework/Headers
 eval "$(pyenv init -)"
 # Node
 export PATH="$PATH:$HOME/.nodebrew/node/v0.12.7/bin"
-
+# GCP
+export PATH="$PATH:$HOME/google-cloud-sdk/bin/"
 
 ############################
 # SETTING
@@ -127,6 +129,7 @@ alias gch="git checkout"
 alias ll="ls -ltrG"
 alias ls="ls -G"
 alias mvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
+alias vimr='open -a vimr'
 
 
 ############################
