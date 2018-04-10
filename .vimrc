@@ -168,10 +168,10 @@ colorscheme hybrid
 
 " scrooloose/nerdtree
 " 引数なしでvimを開くとNERDTreeを起動
-let file_name = expand('%')
-if has('vim_starting') &&  file_name == ''
-  autocmd VimEnter * NERDTree ./
-endif
+" let file_name = expand('%')
+" if has('vim_starting') &&  file_name == ''
+"   autocmd VimEnter * NERDTree ./
+" endif
 " tree shortcut
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 " show dotfiles
