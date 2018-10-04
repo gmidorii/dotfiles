@@ -1,8 +1,6 @@
-autoload -U compinit
-compinit
-
 function peco-src() {
-	local src=$(ghq list --full-path | peco --query "$LBUFFER")
+	#local src=$(ghq list --full-path | peco --query "$LBUFFER")
+	local src=$(ls -1d ${GOPATH}/src/*/*/* | peco --query "$LBUFFER")
 	if [ -n "$src" ]; then
 		BUFFER="cd $src"
 		zle accept-line
@@ -35,3 +33,15 @@ function pk() {
 	fi
 }
 zle -N pk
+
+# mount cancer
+#function mount_cancer() {
+#  for c in $@
+#  do
+#    kind=$(echo ${c} | tr '[:lower:]' '[:upper:]')
+#    mount_smbfs //$(whoami)@cancer/${kind} ${HOME}/mnt/${kind}
+#  done
+#}
+#
+#alias cancer='mount_cancer'
+#alias ucancer='find ~/mnt -type d -exec umount {} \;'

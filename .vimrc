@@ -26,6 +26,10 @@ set mouse=a
 set undodir=$HOME/vim/undo
 set list
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
+set clipboard+=unnamed
+" macvim?
+" set gfn=Monaco:h15
+
 
 " key bind
 "" window
@@ -63,11 +67,15 @@ autocmd FileType go nmap <leader>b  <Plug>(go-build)
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 " go lint
 autocmd FileType go nmap <leader>l  <Plug>(go-lint)
+" go iferr
+autocmd FileType go nmap <leader>e :GoIfErr<CR>
+" go testfunc
+autocmd FileType go nmap <leader>t :GoTestFunc<CR>
 "autocmd BufWritePost,FileWritePost *.go execute 'GoLint' | cwindow
 " save file
 nnoremap <Leader>w :w<CR>
 " close file
-nnoremap <Leader>q :wq<CR>
+nnoremap <Leader>q :x<CR>
 " table mode toggle
 nnoremap <Leader>tm :TableModeToggle<CR>
 " Gina status
@@ -127,7 +135,7 @@ if dein#load_state('$HOME/.vim/dein')
   	call dein#add('roxma/vim-hug-neovim-rpc')
   endif
 	call dein#add('fatih/vim-go')
-	call dein#add('jodosha/vim-godebug')
+	" call dein#add('jodosha/vim-godebug')
 	call dein#add('nsf/gocode')
 	call dein#add('vim-airline/vim-airline')
 	call dein#add('vim-airline/vim-airline-themes')
@@ -143,9 +151,11 @@ if dein#load_state('$HOME/.vim/dein')
 	" ijaas
   call dein#add('$HOME/dev/src/github.com/google/ijaas/vim')
 	" color
-	call dein#add('nightsense/vimspectr')
 
   call dein#add('hotwatermorning/auto-git-diff')
+
+	" auto paste
+	call dein#add('ConradIrwin/vim-bracketed-paste')
 
   " Required:
   call dein#end()
@@ -164,18 +174,19 @@ endif
 "End dein Scripts-------------------------
 
 colorscheme hybrid
-"colorscheme vimspectr30curve-light
+"colorscheme solarized
 
 " scrooloose/nerdtree
 " 引数なしでvimを開くとNERDTreeを起動
 let file_name = expand('%')
-if has('vim_starting') &&  file_name == ''
-  autocmd VimEnter * NERDTree ./
-endif
+"if has('vim_starting') &&  file_name == ''
+autocmd VimEnter * NERDTree ./
+"endif
 " tree shortcut
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 " show dotfiles
 let NERDTreeShowHidden=1
+let g:NERDTreeWinSize = 20
 
 " unknown
 "syntax on
