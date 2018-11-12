@@ -172,9 +172,9 @@ autoload -U colors; colors
 ## uninstall by removing these lines or running `tabtab uninstall sls`
 #[[ -f /Users/midori/.nodebrew/node/v0.12.7/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/midori/.nodebrew/node/v0.12.7/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/soichiro-taga/y/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/soichiro-taga/y/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '$HOME/y/google-cloud-sdk/path.zsh.inc' ]; then source '$HOME/y/google-cloud-sdk/path.zsh.inc'; fi
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/soichiro-taga/y/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/soichiro-taga/y/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '$HOME/y/google-cloud-sdk/completion.zsh.inc' ]; then source '$HOME/y/google-cloud-sdk/completion.zsh.inc'; fi
 # .zprofile
 source ~/.zprofile
 #if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
