@@ -84,6 +84,8 @@ nnoremap <Leader>s :Gina status<CR>
 nnoremap <Leader>c :Gina commit<CR>
 " Gina push
 nnoremap <Leader>p :Gina push<CR>
+" vim surround skip
+let loaded_matchparen = 1
 
 
 " vim-go
@@ -105,7 +107,7 @@ inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 let g:go_snippet_engine = "neosnippet"
 
 " python実行
-autocmd BufNewFile,BufRead *.py nnoremap <C-e> :!python %
+"autocmd BufNewFile,BufRead *.py nnoremap <C-e> :!python %
 if &compatible
   set nocompatible               " Be iMproved
 endif

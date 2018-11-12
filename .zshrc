@@ -1,7 +1,3 @@
-# 初回シェル時のみ tmux実行
-if [ $SHLVL = 1 ]; then
- tmux -2
-fi
 
 ############################
 # ZPLUG
@@ -49,6 +45,7 @@ export PATH="$HOME/.rbenv/shims/:$PATH"
 ### Golang
 #export GOROOT="$HOME/.goenv/versions/1.9.2"
 export GOPATH="$HOME/dev"
+#export GO111MODULE=on
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.goenv/bin:$PATH"
 eval "$(goenv init -)"
@@ -124,6 +121,8 @@ alias g='cd $(ghq root)/$(ghq list | peco)'
 alias c='code $(ghq root)/$(ghq list | peco)'
 alias remem='du -sx / &> /dev/null & sleep 25 && kill $!'
 alias cat='bat'
+alias tmux='tmux -f $HOME/.tmux.conf'
+alias cz='cd $(z -l | cut -c12- | peco)'
 if [[ -x `which colordiff` ]]; then
 	alias diff='colordiff -u'
 else
@@ -184,3 +183,12 @@ source ~/.zprofile
 fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 #autoload -U compinit
 #compinit -u
+
+# z command
+. /usr/local/etc/profile.d/z.sh
+
+
+# 初回シェル時のみ tmux実行
+if [ $SHLVL = 1 ]; then
+ tmux -2
+fi
