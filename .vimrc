@@ -64,6 +64,10 @@ autocmd FileType go nmap <leader>r  <Plug>(go-run)
 " go lint
 autocmd FileType go nmap <leader>l  <Plug>(go-lint)
 "autocmd BufWritePost,FileWritePost *.go execute 'GoLint' | cwindow
+" go iferr
+autocmd FileType go nmap <leader>e :GoIfErr<CR>
+" go test
+autocmd FileType go nmap <leader>t :GoTestFunc<CR>
 " save file
 nnoremap <Leader>w :w<CR>
 " close file
@@ -95,6 +99,7 @@ inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
 inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
 " snippet
 let g:go_snippet_engine = "neosnippet"
+let g:gotests_bin = '/Users/midori/src/golang/bin/gotests'
 
 " python実行
 autocmd BufNewFile,BufRead *.py nnoremap <C-e> :!python %
@@ -127,6 +132,7 @@ if dein#load_state('/Users/midori/.vim/dein')
   	call dein#add('roxma/vim-hug-neovim-rpc')
   endif
 	call dein#add('fatih/vim-go')
+	call dein#add('buoto/gotests-vim')
 	call dein#add('jodosha/vim-godebug')
 	call dein#add('nsf/gocode')
 	call dein#add('vim-airline/vim-airline')
@@ -176,6 +182,9 @@ colorscheme hybrid
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 " show dotfiles
 let NERDTreeShowHidden=1
+" width
+let g:NERDTreeWinSize = 20
+
 
 " unknown
 "syntax on
