@@ -24,8 +24,9 @@ set completeopt=menuone
 set mouse=a
 "set ttymouse=xterm2
 set undodir=$HOME/vim/undo
-set list
-set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
+"set list
+"set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
+set listchars=trail:-,extends:»,precedes:«,nbsp:%
 set clipboard+=unnamed
 " macvim?
 " set gfn=Monaco:h15
@@ -45,7 +46,7 @@ nnoremap sw <C-w>w
 nnoremap st :<C-u>tabnew<CR>
 nnoremap sn gt
 nnoremap sp gT
-nnoremap sq :q<CR>
+nnoremap sq :x<CR>
 nnoremap tr :<C-u>NERDTree<CR>
 "" git
 nnoremap [fugitive]  <Nop>
@@ -71,6 +72,11 @@ autocmd FileType go nmap <leader>l  <Plug>(go-lint)
 autocmd FileType go nmap <leader>e :GoIfErr<CR>
 " go testfunc
 autocmd FileType go nmap <leader>t :GoTestFunc<CR>
+" go fillstruct
+autocmd FileType go nmap <leader>f :GoFillStruct<CR>
+" go def split
+autocmd FileType go nmap <leader>g <Plug>(go-def-split)
+
 "autocmd BufWritePost,FileWritePost *.go execute 'GoLint' | cwindow
 " save file
 nnoremap <Leader>w :w<CR>
@@ -93,6 +99,7 @@ let loaded_matchparen = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
+let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment']
 autocmd FileType go :highlight goErr cterm=bold ctermfg=214
 autocmd FileType go :match goErr /\<err\>/
 " 保存時にGoImports
@@ -101,10 +108,12 @@ let g:go_fmt_command = "goimports"
 let g:go_gocode_unimported_packages = 1
 " auto complete j,k move
 let g:UltiSnipsExpandTrigger="<tab>"
-inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
-inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
+inoremap <expr> <C-j> ((pumvisible())?("\<C-n>"):("\<C-j>"))
+inoremap <expr> <C-k> ((pumvisible())?("\<C-p>"):("\<C-k>"))
 " snippet
 let g:go_snippet_engine = "neosnippet"
+" run/test split
+let g:go_term_mode = 'split'
 
 " python実行
 "autocmd BufNewFile,BufRead *.py nnoremap <C-e> :!python %
@@ -153,9 +162,7 @@ if dein#load_state('$HOME/.vim/dein')
 	" ijaas
   call dein#add('$HOME/dev/src/github.com/google/ijaas/vim')
 	" color
-
   call dein#add('hotwatermorning/auto-git-diff')
-
 	" auto paste
 	call dein#add('ConradIrwin/vim-bracketed-paste')
 
@@ -175,8 +182,8 @@ endif
 
 "End dein Scripts-------------------------
 
-colorscheme hybrid
-"colorscheme solarized
+"colorscheme hybrid
+colorscheme stellarized
 
 " scrooloose/nerdtree
 " 引数なしでvimを開くとNERDTreeを起動
@@ -201,9 +208,9 @@ let g:deoplete#enable_at_startup = 1
 let g:table_mode_corner='|'
 
 " neosnippet
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <C-s>     <Plug>(neosnippet_expand_or_jump)
+smap <C-s>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-s>     <Plug>(neosnippet_expand_target)
 
 let g:python3_host_prog = expand('$HOME/.pyenv/shims/python3')
 
