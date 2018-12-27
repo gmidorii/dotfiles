@@ -20,7 +20,7 @@ set incsearch
 set wrapscan
 set hlsearch
 set autowrite
-set completeopt=menuone
+"set completeopt=menuone
 set mouse=a
 "set ttymouse=xterm2
 set undodir=$HOME/vim/undo
@@ -66,8 +66,6 @@ let mapleader = "\<Space>"
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 " go run
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
-" go lint
-autocmd FileType go nmap <leader>l  <Plug>(go-lint)
 " go iferr
 autocmd FileType go nmap <leader>e :GoIfErr<CR>
 " go testfunc
@@ -90,6 +88,10 @@ nnoremap <Leader>s :Gina status<CR>
 nnoremap <Leader>c :Gina commit<CR>
 " Gina push
 nnoremap <Leader>p :Gina push<CR>
+" Gina log
+nnoremap <leader>l  :Gina log<CR>
+" Gina push
+nnoremap <Leader>n :<C-u>setlocal relativenumber!<CR>
 " vim surround skip
 let loaded_matchparen = 1
 
@@ -105,7 +107,7 @@ autocmd FileType go :match goErr /\<err\>/
 " 保存時にGoImports
 let g:go_fmt_command = "goimports"
 " gocode option(importされていない補完)
-let g:go_gocode_unimported_packages = 1
+" let g:go_gocode_unimported_packages = 1
 " auto complete j,k move
 let g:UltiSnipsExpandTrigger="<tab>"
 inoremap <expr> <C-j> ((pumvisible())?("\<C-n>"):("\<C-j>"))
@@ -114,6 +116,8 @@ inoremap <expr> <C-k> ((pumvisible())?("\<C-p>"):("\<C-k>"))
 let g:go_snippet_engine = "neosnippet"
 " run/test split
 let g:go_term_mode = 'split'
+" godef off
+let g:go_def_mapping_enabled = 0
 
 " python実行
 "autocmd BufNewFile,BufRead *.py nnoremap <C-e> :!python %
@@ -139,15 +143,6 @@ if dein#load_state('$HOME/.vim/dein')
   call dein#add('Shougo/neosnippet.vim')
 	call dein#add('Shougo/neosnippet-snippets')
 	call dein#add('Shougo/denite.nvim')
-	call dein#add('Shougo/deoplete.nvim')
-	call dein#add('zchee/deoplete-go', {'build': 'make'})
-	if !has('nvim')
- 		call dein#add('roxma/nvim-yarp')
-  	call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
-	call dein#add('fatih/vim-go')
-	" call dein#add('jodosha/vim-godebug')
-	call dein#add('nsf/gocode')
 	call dein#add('vim-airline/vim-airline')
 	call dein#add('vim-airline/vim-airline-themes')
 	call dein#add('scrooloose/nerdtree')
@@ -165,6 +160,26 @@ if dein#load_state('$HOME/.vim/dein')
   call dein#add('hotwatermorning/auto-git-diff')
 	" auto paste
 	call dein#add('ConradIrwin/vim-bracketed-paste')
+
+	" vim-lsp
+	" call dein#add('prabirshrestha/async.vim')
+	" call dein#add('prabirshrestha/vim-lsp')
+	" async
+	call dein#add('prabirshrestha/async.vim')
+  call dein#add('prabirshrestha/vim-lsp')
+  call dein#add('prabirshrestha/asyncomplete.vim')
+  call dein#add('prabirshrestha/asyncomplete-lsp.vim')
+
+	" vim-go
+	" call dein#add('Shougo/deoplete.nvim')
+	"call dein#add('zchee/deoplete-go', {'build': 'make'})
+	" if !has('nvim')
+ 	" 	call dein#add('roxma/nvim-yarp')
+  " 	call dein#add('roxma/vim-hug-neovim-rpc')
+  " endif
+	call dein#add('fatih/vim-go')
+	" call dein#add('jodosha/vim-godebug')
+	" call dein#add('nsf/gocode')
 
   " Required:
   call dein#end()
@@ -202,7 +217,7 @@ let g:NERDTreeWinSize = 20
 let g:airline#extensions#tabline#enabled = 1
 
 " deocomplete
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
 " dhruvasagar/vim-table-mode
 let g:table_mode_corner='|'
@@ -218,3 +233,34 @@ let g:python3_host_prog = expand('$HOME/.pyenv/shims/python3')
 noremap <C-P> :Denite buffer<CR>
 noremap <C-N> :Denite file_rec<CR>
 
+" Go-LSP
+if executable('golsp')
+  augroup LspGo
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'go-lang',
+        \ 'cmd': {server_info->['golsp']},
+        \ 'whitelist': ['go'],
+        \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
+		autocmd FileType python,go nmap gd <plug>(lsp-definition)
+  augroup END
+elseif executable('go-langserver')
+  augroup LspGo
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'go-lang',
+        \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio', '-gocodecompletion']},
+        \ 'whitelist': ['go'],
+        \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
+  augroup END
+endif
+
+let g:lsp_async_completion = 1
+let g:lsp_log_verbose = 1
+
+let g:asyncomplete_auto_popup = 1
+
+" Clean unuse plug
+call map(dein#check_clean(), "delete(v:val, 'rf')")
