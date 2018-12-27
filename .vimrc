@@ -245,6 +245,8 @@ noremap <C-N> :Denite file_rec<CR>
 "    autocmd FileType go setlocal omnifunc=lsp#complete
 "		autocmd FileType python,go nmap gd <plug>(lsp-definition)
 "  augroup END
+"endif
+
 if executable('go-langserver')
   augroup LspGo
     au!
@@ -258,8 +260,6 @@ if executable('go-langserver')
 endif
 
 let g:lsp_async_completion = 1
-let g:lsp_log_verbose = 1
-
 let g:asyncomplete_auto_popup = 1
 
 " Clean unuse plug
