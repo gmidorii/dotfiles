@@ -50,7 +50,7 @@ export PATH="$PATH:$GOPATH/bin"
 export PATH="$HOME/.goenv/bin:$PATH"
 eval "$(goenv init -)"
 # JAVA
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 #GREP_OPTIONS="--color=always";export GREP_OPTIONS
 #export C_INCLUDE_PATH=/System/Library/Frameworks/Python.framework/Headers
 ## Python
