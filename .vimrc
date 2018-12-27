@@ -234,18 +234,18 @@ noremap <C-P> :Denite buffer<CR>
 noremap <C-N> :Denite file_rec<CR>
 
 " Go-LSP
-if executable('golsp')
-  augroup LspGo
-    au!
-    autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'go-lang',
-        \ 'cmd': {server_info->['golsp']},
-        \ 'whitelist': ['go'],
-        \ })
-    autocmd FileType go setlocal omnifunc=lsp#complete
-		autocmd FileType python,go nmap gd <plug>(lsp-definition)
-  augroup END
-elseif executable('go-langserver')
+"if executable('golsp')
+"  augroup LspGo
+"    au!
+"    autocmd User lsp_setup call lsp#register_server({
+"        \ 'name': 'go-lang',
+"        \ 'cmd': {server_info->['golsp']},
+"        \ 'whitelist': ['go'],
+"        \ })
+"    autocmd FileType go setlocal omnifunc=lsp#complete
+"		autocmd FileType python,go nmap gd <plug>(lsp-definition)
+"  augroup END
+if executable('go-langserver')
   augroup LspGo
     au!
     autocmd User lsp_setup call lsp#register_server({
