@@ -259,6 +259,18 @@ if executable('go-langserver')
   augroup END
 endif
 
+"if executable('bingo')
+"  augroup LspGo
+"    au!
+"    autocmd User lsp_setup call lsp#register_server({
+"        \ 'name': 'go-lang',
+"        \ 'cmd': {server_info->['bingo', '-mode', 'stdio' ]},
+"        \ 'whitelist': ['go'],
+"        \ })
+"    autocmd FileType go setlocal omnifunc=lsp#complete
+"  augroup END
+"endif
+
 let g:lsp_async_completion = 1
 let g:asyncomplete_auto_popup = 1
 
