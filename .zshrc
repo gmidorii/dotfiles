@@ -44,15 +44,17 @@ eval "$(pyenv init -)"
 export PATH="$HOME/.rbenv/shims/:$PATH"
 ### Golang
 #export GOROOT="$HOME/.goenv/versions/1.9.2"
-export GOPATH="$HOME/dev"
-#export GO111MODULE=on
-export PATH="$PATH:$GOPATH/bin"
-export PATH="$HOME/.goenv/bin:$PATH"
+#export GOPATH="$HOME/dev"
+#export GOROOT="$HOME/.goenv/versions/1.9.1"
+#export GOPATH="$HOME/src/golang"
+export GO111MODULE=on
+#export PATH="$PATH:$GOPATH/bin"
+#export PATH="$HOME/.goenv/bin:$PATH"
 eval "$(goenv init -)"
+# App Engine
+export PATH="$PATH:$HOME/google-cloud-sdk/platform/google_appengine"
 # JAVA
 export JAVA_HOME=$(/usr/libexec/java_home -v 11)
-#GREP_OPTIONS="--color=always";export GREP_OPTIONS
-#export C_INCLUDE_PATH=/System/Library/Frameworks/Python.framework/Headers
 ## Python
 eval "$(pyenv init -)"
 export PIPENV_VENV_IN_PROJECT=true
@@ -63,6 +65,11 @@ export LANG=en_US.UTF-8
 export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
 # Powerline
 export PATH=~/.local/bin/:$PATH
+=======
+# Node
+export PATH="$PATH:$HOME/.nodebrew/node/v0.12.7/bin"
+# GCP
+export PATH="$PATH:$HOME/google-cloud-sdk/bin/"
 
 ############################
 # SETTING
@@ -128,6 +135,7 @@ if [[ -x `which colordiff` ]]; then
 else
 	alias diff='diff -u'
 fi
+alias vimr='open -a vimr'
 
 
 ############################

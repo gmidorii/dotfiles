@@ -24,13 +24,9 @@ set autowrite
 set mouse=a
 "set ttymouse=xterm2
 set undodir=$HOME/vim/undo
-"set list
-"set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
-set listchars=trail:-,extends:»,precedes:«,nbsp:%
+set list
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 set clipboard+=unnamed
-" macvim?
-" set gfn=Monaco:h15
-
 
 " key bind
 "" window
@@ -76,6 +72,14 @@ autocmd FileType go nmap <leader>f :GoFillStruct<CR>
 autocmd FileType go nmap <leader>g <Plug>(go-def-split)
 
 "autocmd BufWritePost,FileWritePost *.go execute 'GoLint' | cwindow
+" go iferr
+autocmd FileType go nmap <leader>e :GoIfErr<CR>
+" go test
+autocmd FileType go nmap <leader>t :GoTestFunc<CR>
+
+" vue
+autocmd FileType vue syntax sync fromstart
+
 " save file
 nnoremap <Leader>w :w<CR>
 " close file
@@ -210,6 +214,7 @@ autocmd VimEnter * NERDTree ./
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 " show dotfiles
 let NERDTreeShowHidden=1
+" width
 let g:NERDTreeWinSize = 20
 
 " unknown
