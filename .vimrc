@@ -26,6 +26,7 @@ set mouse=a
 set undodir=$HOME/vim/undo
 set list
 set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
+set clipboard+=unnamed
 
 " key bind
 "" window
@@ -68,10 +69,14 @@ autocmd FileType go nmap <leader>l  <Plug>(go-lint)
 autocmd FileType go nmap <leader>e :GoIfErr<CR>
 " go test
 autocmd FileType go nmap <leader>t :GoTestFunc<CR>
+
+" vue
+autocmd FileType vue syntax sync fromstart
+
 " save file
 nnoremap <Leader>w :w<CR>
 " close file
-nnoremap <Leader>q :wq<CR>
+nnoremap <Leader>q :x<CR>
 " table mode toggle
 nnoremap <Leader>tm :TableModeToggle<CR>
 " Gina status
@@ -80,6 +85,8 @@ nnoremap <Leader>s :Gina status<CR>
 nnoremap <Leader>c :Gina commit<CR>
 " Gina push
 nnoremap <Leader>p :Gina push<CR>
+" vim surround skip
+let loaded_matchparen = 1
 
 
 " vim-go
@@ -150,8 +157,10 @@ if dein#load_state('/Users/midori/.vim/dein')
   call dein#add('$HOME/src/golang/src/github.com/google/ijaas/vim')
 	" color
 	call dein#add('nightsense/vimspectr')
-
-  call dein#add('hotwatermorning/auto-git-diff')
+	call dein#add('hotwatermorning/auto-git-diff')
+	call dein#add('ConradIrwin/vim-bracketed-paste')
+	" vue
+	call dein#add('posva/vim-vue')
 
   " Required:
   call dein#end()
@@ -176,7 +185,7 @@ colorscheme hybrid
 " 引数なしでvimを開くとNERDTreeを起動
 " let file_name = expand('%')
 " if has('vim_starting') &&  file_name == ''
-"   autocmd VimEnter * NERDTree ./
+autocmd VimEnter * NERDTree ./
 " endif
 " tree shortcut
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
