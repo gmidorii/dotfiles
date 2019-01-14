@@ -1,32 +1,3 @@
-############################
-# SOURCE
-############################
-# 初回シェル時のみ tmux実行
-if [ $SHLVL = 1 ]; then
- tmux -2
-fi
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then
-  source $HOME'/google-cloud-sdk/path.zsh.inc'
-fi
-# The next line enables shell command completion for gcloud.
-if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then
-  source $HOME'/google-cloud-sdk/completion.zsh.inc'
-fi
-# gvim
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
-# kubectl
-autoload -U colors; colors
-source /usr/local/etc/zsh-kubectl-prompt/kubectl.zsh
-RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
-# serverless
-## tabtab source for serverless package
-## uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/midori/.nodebrew/node/v0.12.7/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/midori/.nodebrew/node/v0.12.7/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-## tabtab source for sls package
-## uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/midori/.nodebrew/node/v0.12.7/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/midori/.nodebrew/node/v0.12.7/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
-
 
 ############################
 # ZPLUG
@@ -42,7 +13,9 @@ zplug "plugins/git",   from:oh-my-zsh
 zplug "plugins/brew",   from:oh-my-zsh
 zplug "b4b4r07/enhancd", use:enhancd.sh
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
-zplug "themes/kphoen", from:oh-my-zsh
+# prompt
+#zplug "themes/kphoen", from:oh-my-zsh
+zplug "themes/ys", from:oh-my-zsh
 
 # zplug install
 if ! zplug check --verbose; then
@@ -52,8 +25,7 @@ if ! zplug check --verbose; then
   fi
 fi
 
-zplug load --verbose
-
+zplug load --verbose >/dev/null
 
 ############################
 # EXPORT
@@ -64,19 +36,36 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/loca
 export PATH="/usr/local/heroku/bin:$PATH"
 # grpc
 export PATH="$PATH:$HOME/command/protoc/bin"
+# pyenv
+PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+# rbenv
+export PATH="$HOME/.rbenv/shims/:$PATH"
+### Golang
+#export GOROOT="$HOME/.goenv/versions/1.9.2"
+#export GOPATH="$HOME/dev"
+#export GOROOT="$HOME/.goenv/versions/1.9.1"
+#export GOPATH="$HOME/src/golang"
+export GO111MODULE=on
+#export PATH="$PATH:$GOPATH/bin"
+#export PATH="$HOME/.goenv/bin:$PATH"
+eval "$(goenv init -)"
 # App Engine
 export PATH="$PATH:$HOME/google-cloud-sdk/platform/google_appengine"
-# 環境変数
-export LANG=ja_JP.UTF-8
-# Golang
-export GOROOT="$HOME/.goenv/versions/1.9.1"
-export GOPATH="$HOME/src/golang"
-export PATH="$PATH:$GOPATH/bin"
-export PATH="$HOME/.goenv/bin:$PATH"
-eval "$(goenv init -)"
-# Python
-export C_INCLUDE_PATH=/System/Library/Frameworks/Python.framework/Headers
+# JAVA
+export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+## Python
 eval "$(pyenv init -)"
+export PIPENV_VENV_IN_PROJECT=true
+### pipenv (https://github.com/pypa/pipenv/issues/187)
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+## Postgres
+export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
+# Powerline
+export PATH=~/.local/bin/:$PATH
+=======
 # Node
 export PATH="$PATH:$HOME/.nodebrew/node/v0.12.7/bin"
 # GCP
@@ -112,23 +101,40 @@ setopt auto_menu
 zstyle ':completion:*:default' menu select=1
 # keybind
 bindkey -e
-# .zprofile
-source ~/.zprofile
 if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
 # direnv
-eval "$(direnv hook zsh)"
+#eval "$(direnv hook zsh)"
 
 
 ############################
 # ALIAS
 ############################
-alias vi="nvim"
+alias vi="vim"
+alias nvi="nvim"
 alias gs="git status"
+alias gc="git commit"
 alias gb-del="git branch --merged |egrep -v '\\*|develop|master'|xargs git branch -d"
 alias gch="git checkout"
+alias gss="git status -s"
+alias ga="git add"
+alias gp="git push"
+alias gd="git diff"
 alias ll="ls -ltrG"
 alias ls="ls -G"
+alias gl="git log --decorate --oneline"
+alias ssh='TERM=xterm ssh'
 alias mvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
+alias g='cd $(ghq root)/$(ghq list | peco)'
+alias c='code $(ghq root)/$(ghq list | peco)'
+alias remem='du -sx / &> /dev/null & sleep 25 && kill $!'
+alias cat='bat'
+alias tmux='tmux -f $HOME/.tmux.conf'
+alias cz='cd $(z -l | cut -c12- | peco)'
+if [[ -x `which colordiff` ]]; then
+	alias diff='colordiff -u'
+else
+	alias diff='diff -u'
+fi
 alias vimr='open -a vimr'
 
 
@@ -149,4 +155,33 @@ setopt share_history
 setopt append_history
 setopt hist_ignore_all_dups
 
+############################
+# SOURCE
+############################
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f $HOME/google-cloud-sdk/path.zsh.inc ]; then
+  source $HOME'/google-cloud-sdk/path.zsh.inc'
+fi
+# The next line enables shell command completion for gcloud.
+if [ -f $HOME/google-cloud-sdk/completion.zsh.inc ]; then
+  source $HOME'/google-cloud-sdk/completion.zsh.inc'
+fi
+# gvim
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+# kubectl
+autoload -U colors; colors
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '$HOME/y/google-cloud-sdk/path.zsh.inc' ]; then source '$HOME/y/google-cloud-sdk/path.zsh.inc'; fi
+# The next line enables shell command completion for gcloud.
+if [ -f '$HOME/y/google-cloud-sdk/completion.zsh.inc' ]; then source '$HOME/y/google-cloud-sdk/completion.zsh.inc'; fi
+# .zprofile
+source ~/.zprofile
+fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
 
+# z command
+. /usr/local/etc/profile.d/z.sh
+
+# 初回シェル時のみ tmux実行
+if [ $SHLVL = 1 ]; then
+ tmux -2
+fi

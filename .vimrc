@@ -20,7 +20,7 @@ set incsearch
 set wrapscan
 set hlsearch
 set autowrite
-set completeopt=menuone
+"set completeopt=menuone
 set mouse=a
 "set ttymouse=xterm2
 set undodir=$HOME/vim/undo
@@ -42,7 +42,7 @@ nnoremap sw <C-w>w
 nnoremap st :<C-u>tabnew<CR>
 nnoremap sn gt
 nnoremap sp gT
-nnoremap sq :q<CR>
+nnoremap sq :x<CR>
 nnoremap tr :<C-u>NERDTree<CR>
 "" git
 nnoremap [fugitive]  <Nop>
@@ -62,8 +62,15 @@ let mapleader = "\<Space>"
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 " go run
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
-" go lint
-autocmd FileType go nmap <leader>l  <Plug>(go-lint)
+" go iferr
+autocmd FileType go nmap <leader>e :GoIfErr<CR>
+" go testfunc
+autocmd FileType go nmap <leader>t :GoTestFunc<CR>
+" go fillstruct
+autocmd FileType go nmap <leader>f :GoFillStruct<CR>
+" go def split
+autocmd FileType go nmap <leader>g <Plug>(go-def-split)
+
 "autocmd BufWritePost,FileWritePost *.go execute 'GoLint' | cwindow
 " go iferr
 autocmd FileType go nmap <leader>e :GoIfErr<CR>
@@ -85,6 +92,10 @@ nnoremap <Leader>s :Gina status<CR>
 nnoremap <Leader>c :Gina commit<CR>
 " Gina push
 nnoremap <Leader>p :Gina push<CR>
+" Gina log
+nnoremap <leader>l  :Gina log<CR>
+" Gina push
+nnoremap <Leader>n :<C-u>setlocal relativenumber!<CR>
 " vim surround skip
 let loaded_matchparen = 1
 
@@ -94,22 +105,26 @@ let loaded_matchparen = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
+let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment']
 autocmd FileType go :highlight goErr cterm=bold ctermfg=214
 autocmd FileType go :match goErr /\<err\>/
 " 保存時にGoImports
 let g:go_fmt_command = "goimports"
 " gocode option(importされていない補完)
-let g:go_gocode_unimported_packages = 1
+" let g:go_gocode_unimported_packages = 1
 " auto complete j,k move
 let g:UltiSnipsExpandTrigger="<tab>"
-inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
-inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
+inoremap <expr> <C-j> ((pumvisible())?("\<C-n>"):("\<C-j>"))
+inoremap <expr> <C-k> ((pumvisible())?("\<C-p>"):("\<C-k>"))
 " snippet
 let g:go_snippet_engine = "neosnippet"
-let g:gotests_bin = '/Users/midori/src/golang/bin/gotests'
+" run/test split
+let g:go_term_mode = 'split'
+" godef off
+let g:go_def_mapping_enabled = 0
 
 " python実行
-autocmd BufNewFile,BufRead *.py nnoremap <C-e> :!python %
+"autocmd BufNewFile,BufRead *.py nnoremap <C-e> :!python %
 if &compatible
   set nocompatible               " Be iMproved
 endif
@@ -118,30 +133,20 @@ endif
 "Start dein Scripts-------------------------
 
 " Required:
-set runtimepath+=/Users/midori/.vim/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=$HOME/.vim/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/Users/midori/.vim/dein')
-  call dein#begin('/Users/midori/.vim/dein')
+if dein#load_state('$HOME/.vim/dein')
+  call dein#begin('$HOME/.vim/dein')
 
   " Let dein manage dein
   " Required:
-  call dein#add('/Users/midori/.vim/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('$HOME/.vim/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
   call dein#add('Shougo/neosnippet.vim')
 	call dein#add('Shougo/neosnippet-snippets')
 	call dein#add('Shougo/denite.nvim')
-	call dein#add('Shougo/deoplete.nvim')
-	call dein#add('zchee/deoplete-go', {'build': 'make'})
-	if !has('nvim')
- 		call dein#add('roxma/nvim-yarp')
-  	call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
-	call dein#add('fatih/vim-go')
-	call dein#add('buoto/gotests-vim')
-	call dein#add('jodosha/vim-godebug')
-	call dein#add('nsf/gocode')
 	call dein#add('vim-airline/vim-airline')
 	call dein#add('vim-airline/vim-airline-themes')
 	call dein#add('scrooloose/nerdtree')
@@ -154,13 +159,31 @@ if dein#load_state('/Users/midori/.vim/dein')
 	" Git
   call dein#add('lambdalisue/gina.vim')
 	" ijaas
-  call dein#add('$HOME/src/golang/src/github.com/google/ijaas/vim')
+  call dein#add('$HOME/dev/src/github.com/google/ijaas/vim')
 	" color
-	call dein#add('nightsense/vimspectr')
-	call dein#add('hotwatermorning/auto-git-diff')
+  call dein#add('hotwatermorning/auto-git-diff')
+	" auto paste
 	call dein#add('ConradIrwin/vim-bracketed-paste')
-	" vue
-	call dein#add('posva/vim-vue')
+
+	" vim-lsp
+	" call dein#add('prabirshrestha/async.vim')
+	" call dein#add('prabirshrestha/vim-lsp')
+	" async
+	call dein#add('prabirshrestha/async.vim')
+  call dein#add('prabirshrestha/vim-lsp')
+  call dein#add('prabirshrestha/asyncomplete.vim')
+  call dein#add('prabirshrestha/asyncomplete-lsp.vim')
+
+	" vim-go
+	" call dein#add('Shougo/deoplete.nvim')
+	"call dein#add('zchee/deoplete-go', {'build': 'make'})
+	" if !has('nvim')
+ 	" 	call dein#add('roxma/nvim-yarp')
+  " 	call dein#add('roxma/vim-hug-neovim-rpc')
+  " endif
+	call dein#add('fatih/vim-go')
+	" call dein#add('jodosha/vim-godebug')
+	" call dein#add('nsf/gocode')
 
   " Required:
   call dein#end()
@@ -179,14 +202,14 @@ endif
 "End dein Scripts-------------------------
 
 colorscheme hybrid
-"colorscheme vimspectr30curve-light
+" colorscheme stellarized
 
 " scrooloose/nerdtree
 " 引数なしでvimを開くとNERDTreeを起動
-" let file_name = expand('%')
-" if has('vim_starting') &&  file_name == ''
+let file_name = expand('%')
+"if has('vim_starting') &&  file_name == ''
 autocmd VimEnter * NERDTree ./
-" endif
+"endif
 " tree shortcut
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 " show dotfiles
@@ -194,21 +217,20 @@ let NERDTreeShowHidden=1
 " width
 let g:NERDTreeWinSize = 20
 
-
 " unknown
 "syntax on
 let g:airline#extensions#tabline#enabled = 1
 
 " deocomplete
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
 " dhruvasagar/vim-table-mode
 let g:table_mode_corner='|'
 
 " neosnippet
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <C-s>     <Plug>(neosnippet_expand_or_jump)
+smap <C-s>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-s>     <Plug>(neosnippet_expand_target)
 
 let g:python3_host_prog = expand('$HOME/.pyenv/shims/python3')
 
@@ -216,3 +238,46 @@ let g:python3_host_prog = expand('$HOME/.pyenv/shims/python3')
 noremap <C-P> :Denite buffer<CR>
 noremap <C-N> :Denite file_rec<CR>
 
+" Go-LSP
+"if executable('golsp')
+"  augroup LspGo
+"    au!
+"    autocmd User lsp_setup call lsp#register_server({
+"        \ 'name': 'go-lang',
+"        \ 'cmd': {server_info->['golsp']},
+"        \ 'whitelist': ['go'],
+"        \ })
+"    autocmd FileType go setlocal omnifunc=lsp#complete
+"		autocmd FileType python,go nmap gd <plug>(lsp-definition)
+"  augroup END
+"endif
+
+if executable('go-langserver')
+  augroup LspGo
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'go-lang',
+        \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio', '-gocodecompletion']},
+        \ 'whitelist': ['go'],
+        \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
+  augroup END
+endif
+
+"if executable('bingo')
+"  augroup LspGo
+"    au!
+"    autocmd User lsp_setup call lsp#register_server({
+"        \ 'name': 'go-lang',
+"        \ 'cmd': {server_info->['bingo', '-mode', 'stdio' ]},
+"        \ 'whitelist': ['go'],
+"        \ })
+"    autocmd FileType go setlocal omnifunc=lsp#complete
+"  augroup END
+"endif
+
+let g:lsp_async_completion = 1
+let g:asyncomplete_auto_popup = 1
+
+" Clean unuse plug
+call map(dein#check_clean(), "delete(v:val, 'rf')")
