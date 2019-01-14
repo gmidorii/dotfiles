@@ -152,16 +152,16 @@ if dein#load_state('$HOME/.vim/dein')
 	call dein#add('scrooloose/nerdtree')
 	" python
 	"call dein#add('davidhalter/jedi-vim', {'of_ft': 'python'})
-  " You can specify revision/branch/tag.
-  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+	" You can specify revision/branch/tag.
+	call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 	" Markdown
-  call dein#add('dhruvasagar/vim-table-mode')
+	call dein#add('dhruvasagar/vim-table-mode')
 	" Git
-  call dein#add('lambdalisue/gina.vim')
+	call dein#add('lambdalisue/gina.vim')
 	" ijaas
-  call dein#add('$HOME/dev/src/github.com/google/ijaas/vim')
+	" call dein#add('$HOME/dev/src/github.com/google/ijaas/vim')
 	" color
-  call dein#add('hotwatermorning/auto-git-diff')
+	call dein#add('hotwatermorning/auto-git-diff')
 	" auto paste
 	call dein#add('ConradIrwin/vim-bracketed-paste')
 
@@ -170,9 +170,9 @@ if dein#load_state('$HOME/.vim/dein')
 	" call dein#add('prabirshrestha/vim-lsp')
 	" async
 	call dein#add('prabirshrestha/async.vim')
-  call dein#add('prabirshrestha/vim-lsp')
-  call dein#add('prabirshrestha/asyncomplete.vim')
-  call dein#add('prabirshrestha/asyncomplete-lsp.vim')
+	call dein#add('prabirshrestha/vim-lsp')
+	call dein#add('prabirshrestha/asyncomplete.vim')
+	call dein#add('prabirshrestha/asyncomplete-lsp.vim')
 
 	" vim-go
 	" call dein#add('Shougo/deoplete.nvim')
@@ -280,4 +280,4 @@ let g:lsp_async_completion = 1
 let g:asyncomplete_auto_popup = 1
 
 " Clean unuse plug
-call map(dein#check_clean(), "delete(v:val, 'rf')")
+" call map(dein#check_clean(), "delete(v:val, 'rf')")
