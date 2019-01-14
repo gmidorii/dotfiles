@@ -162,31 +162,16 @@ fi
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 # kubectl
 autoload -U colors; colors
-#source /usr/local/etc/zsh-kubectl-prompt/kubectl.zsh
-#RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
-# serverless
-## tabtab source for serverless package
-## uninstall by removing these lines or running `tabtab uninstall serverless`
-#[[ -f /Users/midori/.nodebrew/node/v0.12.7/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/midori/.nodebrew/node/v0.12.7/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-## tabtab source for sls package
-## uninstall by removing these lines or running `tabtab uninstall sls`
-#[[ -f /Users/midori/.nodebrew/node/v0.12.7/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/midori/.nodebrew/node/v0.12.7/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '$HOME/y/google-cloud-sdk/path.zsh.inc' ]; then source '$HOME/y/google-cloud-sdk/path.zsh.inc'; fi
 # The next line enables shell command completion for gcloud.
 if [ -f '$HOME/y/google-cloud-sdk/completion.zsh.inc' ]; then source '$HOME/y/google-cloud-sdk/completion.zsh.inc'; fi
 # .zprofile
 source ~/.zprofile
-#if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
-#[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
-# git auto complete
 fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
-#autoload -U compinit
-#compinit -u
 
 # z command
 . /usr/local/etc/profile.d/z.sh
-
 
 # 初回シェル時のみ tmux実行
 if [ $SHLVL = 1 ]; then
