@@ -33,15 +33,3 @@ function pk() {
 	fi
 }
 zle -N pk
-
-# mount cancer
-#function mount_cancer() {
-#  for c in $@
-#  do
-#    kind=$(echo ${c} | tr '[:lower:]' '[:upper:]')
-#    mount_smbfs //$(whoami)@cancer/${kind} ${HOME}/mnt/${kind}
-#  done
-#}
-#
-#alias cancer='mount_cancer'
-#alias ucancer='find ~/mnt -type d -exec umount {} \;'

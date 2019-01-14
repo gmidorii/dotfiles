@@ -197,8 +197,8 @@ endif
 
 "End dein Scripts-------------------------
 
-"colorscheme hybrid
-colorscheme stellarized
+colorscheme hybrid
+" colorscheme stellarized
 
 " scrooloose/nerdtree
 " 引数なしでvimを開くとNERDTreeを起動
