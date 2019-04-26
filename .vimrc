@@ -7,9 +7,10 @@ set smartindent
 set pumheight=10
 set showmatch
 set matchtime=1
-set fenc=utf-8
+set encoding=utf-8
+set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+set fileformats=unix,dos,mac
 set nobackup
-"set noswapfile
 set directory=~/.vim/swap
 set virtualedit=onemore
 set wildmode=list:longest
@@ -20,12 +21,10 @@ set incsearch
 set wrapscan
 set hlsearch
 set autowrite
-"set completeopt=menuone
 set mouse=a
-"set ttymouse=xterm2
 set undodir=$HOME/vim/undo
 set list
-set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
+set listchars=tab:>-,trail:-
 set clipboard+=unnamed
 
 " key bind
@@ -99,7 +98,6 @@ nnoremap <Leader>n :<C-u>setlocal relativenumber!<CR>
 " vim surround skip
 let loaded_matchparen = 1
 
-
 " vim-go
 " highlight
 let g:go_highlight_functions = 1
@@ -108,10 +106,7 @@ let g:go_highlight_structs = 1
 let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment']
 autocmd FileType go :highlight goErr cterm=bold ctermfg=214
 autocmd FileType go :match goErr /\<err\>/
-" 保存時にGoImports
 let g:go_fmt_command = "goimports"
-" gocode option(importされていない補完)
-" let g:go_gocode_unimported_packages = 1
 " auto complete j,k move
 let g:UltiSnipsExpandTrigger="<tab>"
 inoremap <expr> <C-j> ((pumvisible())?("\<C-n>"):("\<C-j>"))
@@ -145,45 +140,32 @@ if dein#load_state('$HOME/.vim/dein')
 
   " Add or remove your plugins here:
   call dein#add('Shougo/neosnippet.vim')
-	call dein#add('Shougo/neosnippet-snippets')
-	call dein#add('Shougo/denite.nvim')
-	call dein#add('vim-airline/vim-airline')
-	call dein#add('vim-airline/vim-airline-themes')
-	call dein#add('scrooloose/nerdtree')
-	" python
-	"call dein#add('davidhalter/jedi-vim', {'of_ft': 'python'})
-	" You can specify revision/branch/tag.
-	call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
-	" Markdown
-	call dein#add('dhruvasagar/vim-table-mode')
-	" Git
-	call dein#add('lambdalisue/gina.vim')
-	" ijaas
-	" call dein#add('$HOME/dev/src/github.com/google/ijaas/vim')
-	" color
-	call dein#add('hotwatermorning/auto-git-diff')
-	" auto paste
-	call dein#add('ConradIrwin/vim-bracketed-paste')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('vim-airline/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
+  call dein#add('scrooloose/nerdtree')
+  " You can specify revision/branch/tag.
+  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+  " Markdown
+  call dein#add('dhruvasagar/vim-table-mode')
+  " Git
+  call dein#add('lambdalisue/gina.vim')
+  " color
+  call dein#add('hotwatermorning/auto-git-diff')
+  " auto paste
+  call dein#add('ConradIrwin/vim-bracketed-paste')
+  " fzf
+  call dein#add('/usr/local/opt/fzf')
+  call dein#add('junegunn/fzf.vim')
 
-	" vim-lsp
-	" call dein#add('prabirshrestha/async.vim')
-	" call dein#add('prabirshrestha/vim-lsp')
-	" async
-	call dein#add('prabirshrestha/async.vim')
-	call dein#add('prabirshrestha/vim-lsp')
-	call dein#add('prabirshrestha/asyncomplete.vim')
-	call dein#add('prabirshrestha/asyncomplete-lsp.vim')
 
-	" vim-go
-	" call dein#add('Shougo/deoplete.nvim')
-	"call dein#add('zchee/deoplete-go', {'build': 'make'})
-	" if !has('nvim')
- 	" 	call dein#add('roxma/nvim-yarp')
-  " 	call dein#add('roxma/vim-hug-neovim-rpc')
-  " endif
-	call dein#add('fatih/vim-go')
-	" call dein#add('jodosha/vim-godebug')
-	" call dein#add('nsf/gocode')
+  " vim-go
+  call dein#add('fatih/vim-go')
+  call dein#add('Shougo/deoplete.nvim')
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
 
   " Required:
   call dein#end()
@@ -205,8 +187,6 @@ colorscheme hybrid
 " colorscheme stellarized
 
 " scrooloose/nerdtree
-" 引数なしでvimを開くとNERDTreeを起動
-let file_name = expand('%')
 "if has('vim_starting') &&  file_name == ''
 autocmd VimEnter * NERDTree ./
 "endif
@@ -222,7 +202,8 @@ let g:NERDTreeWinSize = 20
 let g:airline#extensions#tabline#enabled = 1
 
 " deocomplete
-" let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
 " dhruvasagar/vim-table-mode
 let g:table_mode_corner='|'
@@ -235,49 +216,8 @@ xmap <C-s>     <Plug>(neosnippet_expand_target)
 let g:python3_host_prog = expand('$HOME/.pyenv/shims/python3')
 
 " Denite vim
-noremap <C-P> :Denite buffer<CR>
-noremap <C-N> :Denite file_rec<CR>
-
-" Go-LSP
-"if executable('golsp')
-"  augroup LspGo
-"    au!
-"    autocmd User lsp_setup call lsp#register_server({
-"        \ 'name': 'go-lang',
-"        \ 'cmd': {server_info->['golsp']},
-"        \ 'whitelist': ['go'],
-"        \ })
-"    autocmd FileType go setlocal omnifunc=lsp#complete
-"		autocmd FileType python,go nmap gd <plug>(lsp-definition)
-"  augroup END
-"endif
-
-if executable('go-langserver')
-  augroup LspGo
-    au!
-    autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'go-lang',
-        \ 'cmd': {server_info->['go-langserver', '-mode', 'stdio', '-gocodecompletion']},
-        \ 'whitelist': ['go'],
-        \ })
-    autocmd FileType go setlocal omnifunc=lsp#complete
-  augroup END
-endif
-
-"if executable('bingo')
-"  augroup LspGo
-"    au!
-"    autocmd User lsp_setup call lsp#register_server({
-"        \ 'name': 'go-lang',
-"        \ 'cmd': {server_info->['bingo', '-mode', 'stdio' ]},
-"        \ 'whitelist': ['go'],
-"        \ })
-"    autocmd FileType go setlocal omnifunc=lsp#complete
-"  augroup END
-"endif
-
-let g:lsp_async_completion = 1
-let g:asyncomplete_auto_popup = 1
+noremap <C-P> :GFiles<CR>
+noremap <C-N> :Buffers<CR>
 
 " Clean unuse plug
 " call map(dein#check_clean(), "delete(v:val, 'rf')")
