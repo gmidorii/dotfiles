@@ -1,6 +1,6 @@
 function peco-src() {
-	#local src=$(ghq list --full-path | peco --query "$LBUFFER")
-	local src=$(ls -1d ${GOPATH}/src/*/*/* | peco --query "$LBUFFER")
+	local src=$(ghq list --full-path | peco --query "$LBUFFER")
+	#local src=$(ls -1d ${GOPATH}/src/*/*/* | peco --query "$LBUFFER")
 	if [ -n "$src" ]; then
 		BUFFER="cd $src"
 		zle accept-line

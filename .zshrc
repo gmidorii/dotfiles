@@ -2,20 +2,12 @@
 ############################
 # ZPLUG
 ############################
-# Path to your oh-my-zsh installation.
 export ZSH=$HOME/dotfiles
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
 # zplug
-zplug "tcnksm/docker-alias", use:zshrc
-zplug "plugins/git",   from:oh-my-zsh
-zplug "plugins/brew",   from:oh-my-zsh
-zplug "b4b4r07/enhancd", use:enhancd.sh
-zplug "zsh-users/zsh-syntax-highlighting", defer:3
-# prompt
-#zplug "themes/kphoen", from:oh-my-zsh
-zplug "themes/ys", from:oh-my-zsh
+zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
 
 # zplug install
 if ! zplug check --verbose; then
@@ -24,6 +16,10 @@ if ! zplug check --verbose; then
     echo; zplug install
   fi
 fi
+
+# spaceship-prompt
+SPACESHIP_DIR_COLOR=035
+SPACESHIP_KUBECONTEXT_COLOR=252
 
 zplug load --verbose >/dev/null
 
@@ -37,24 +33,20 @@ export PATH="/usr/local/heroku/bin:$PATH"
 # grpc
 export PATH="$PATH:$HOME/command/protoc/bin"
 # pyenv
-PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+export PIPENV_VENV_IN_PROJECT=true
+export PATH="$PATH:$HOME/.local/bin"
 # rbenv
 export PATH="$HOME/.rbenv/shims/:$PATH"
 ### Golang
-#export GOROOT="$HOME/.goenv/versions/1.9.2"
-#export GOPATH="$HOME/dev"
-#export GOROOT="$HOME/.goenv/versions/1.9.1"
-#export GOPATH="$HOME/src/golang"
+export GOPATH=$HOME/dev
+export PATH="/usr/local/go/bin:$GOPATH/bin:$PATH"
 export GO111MODULE=on
-#export PATH="$PATH:$GOPATH/bin"
-#export PATH="$HOME/.goenv/bin:$PATH"
-eval "$(goenv init -)"
+#eval "$(goenv init -)"
 # App Engine
 export PATH="$PATH:$HOME/google-cloud-sdk/platform/google_appengine"
-# JAVA
-export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+# Java
+export JAVA_HOME=$(/usr/libexec/java_home)
 ## Python
 eval "$(pyenv init -)"
 export PIPENV_VENV_IN_PROJECT=true
@@ -62,10 +54,9 @@ export PIPENV_VENV_IN_PROJECT=true
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 ## Postgres
-export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
+export PATH="/Library/PostgreSQL/9.6/bin/:$PATH"
 # Powerline
 export PATH=~/.local/bin/:$PATH
-=======
 # Node
 export PATH="$PATH:$HOME/.nodebrew/node/v0.12.7/bin"
 # GCP
@@ -144,9 +135,9 @@ alias vimr='open -a vimr'
 # 履歴ファイルの保存先
 export HISTFILE=${HOME}/.zsh_history
 # メモリに保存される履歴の件数
-export HISTSIZE=1000
+export HISTSIZE=10000
 # 履歴ファイルに保存される履歴の件数
-export SAVEHIST=100000
+export SAVEHIST=1000000
 # 重複を記録しない
 setopt hist_ignore_dups
 # 開始と終了を記録
@@ -177,9 +168,6 @@ if [ -f '$HOME/y/google-cloud-sdk/completion.zsh.inc' ]; then source '$HOME/y/go
 # .zprofile
 source ~/.zprofile
 fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
-
-# z command
-. /usr/local/etc/profile.d/z.sh
 
 # 初回シェル時のみ tmux実行
 if [ $SHLVL = 1 ]; then
