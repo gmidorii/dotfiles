@@ -22,6 +22,9 @@ set PATH $HOME/.local/bin $PATH
 set PATH $HOME/.nodebrew/current/bin $PATH
 # GCP
 set PATH $HOME/google-cloud-sdk/bin/ $PATH
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/midori/google-cloud-sdk/path.fish.inc' ]; . '/Users/midori/google-cloud-sdk/path.fish.inc'; end
+
 # Rush
 set PATH $HOME/.cargo/bin $PATH
 

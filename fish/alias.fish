@@ -1,3 +1,4 @@
+balias vi 'vim'
 balias gs 'git status'
 balias ga 'git add'
 balias gc 'git commit'
