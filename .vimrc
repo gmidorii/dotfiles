@@ -8,7 +8,8 @@ set pumheight=10
 set showmatch
 set matchtime=1
 set encoding=utf-8
-set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+"set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+set fileencodings=utf-8
 set fileformats=unix,dos,mac
 set nobackup
 set directory=~/.vim/swap
@@ -116,13 +117,15 @@ let g:go_snippet_engine = "neosnippet"
 " run/test split
 let g:go_term_mode = 'split'
 " godef off
-let g:go_def_mapping_enabled = 0
+let g:go_def_mapping_enabled = 1
 
 " python実行
 "autocmd BufNewFile,BufRead *.py nnoremap <C-e> :!python %
 if &compatible
   set nocompatible               " Be iMproved
 endif
+
+let g:python3_host_prog = expand('$HOME/.pyenv/shims/python3')
 
 
 "Start dein Scripts-------------------------
@@ -168,6 +171,7 @@ if dein#load_state(deinDir)
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
   endif
+  call dein#add('buoto/gotests-vim')
 
   " Required:
   call dein#end()
@@ -215,7 +219,6 @@ imap <C-s>     <Plug>(neosnippet_expand_or_jump)
 smap <C-s>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-s>     <Plug>(neosnippet_expand_target)
 
-let g:python3_host_prog = expand('$HOME/.pyenv/shims/python3')
 
 " Denite vim
 noremap <C-P> :GFiles<CR>
