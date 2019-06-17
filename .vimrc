@@ -69,6 +69,8 @@ autocmd FileType go nmap <leader>t :GoTestFunc<CR>
 autocmd FileType go nmap <leader>f :GoFillStruct<CR>
 " go def split
 autocmd FileType go nmap <leader>g <Plug>(go-def-split)
+" go doc
+autocmd FileType go nmap <leader>d :GoDoc<CR>
 
 "autocmd BufWritePost,FileWritePost *.go execute 'GoLint' | cwindow
 " go iferr
@@ -116,7 +118,7 @@ let g:go_snippet_engine = "neosnippet"
 " run/test split
 let g:go_term_mode = 'split'
 " godef off
-let g:go_def_mapping_enabled = 0
+let g:go_def_mapping_enabled = 1
 
 " python実行
 "autocmd BufNewFile,BufRead *.py nnoremap <C-e> :!python %
@@ -158,7 +160,6 @@ if dein#load_state('$HOME/.vim/dein')
   call dein#add('/usr/local/opt/fzf')
   call dein#add('junegunn/fzf.vim')
 
-
   " vim-go
   call dein#add('fatih/vim-go')
   call dein#add('Shougo/deoplete.nvim')
@@ -166,6 +167,7 @@ if dein#load_state('$HOME/.vim/dein')
     call dein#add('roxma/nvim-yarp')
     call dein#add('roxma/vim-hug-neovim-rpc')
   endif
+  call dein#add('buoto/gotests-vim')
 
   " Required:
   call dein#end()
@@ -215,7 +217,7 @@ xmap <C-s>     <Plug>(neosnippet_expand_target)
 
 let g:python3_host_prog = expand('$HOME/.pyenv/shims/python3')
 
-" Denite vim
+" fzf vim
 noremap <C-P> :GFiles<CR>
 noremap <C-N> :Buffers<CR>
 
